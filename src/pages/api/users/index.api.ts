@@ -21,7 +21,7 @@ export default async function handler(
 
   if (userExist) {
     return res.status(400).json({
-      message: 'Username alredy taken',
+      message: 'Username already taken',
     })
   }
 
@@ -32,17 +32,10 @@ export default async function handler(
     },
   })
 
-  setCookie(
-    {
-      res,
-    },
-    '@igniteCall:userId',
-    user.id,
-    {
-      maxAge: 60 * 60 * 24 * 7,
-      path: '/',
-    },
-  )
+  setCookie({ res }, '@ignitecall:userId', user.id, {
+    maxAge: 60 * 60 * 24 * 7,
+    path: '/',
+  })
 
   return res.status(201).json(user)
 }

@@ -9,10 +9,8 @@ import { z } from 'zod'
 import { ConfirmForm, FormActions, FormError, FormHeader } from './styles'
 
 const confirmFormSchema = z.object({
-  name: z
-    .string()
-    .min(3, { message: 'O nome precisa de no minimo três caracteres' }),
-  email: z.string().email({ message: 'Digite um email valido' }),
+  name: z.string().min(3, { message: 'O nome precisa no mínimo 3 caracteres' }),
+  email: z.string().email({ message: 'Digite um e-mail válido' }),
   observations: z.string().nullable(),
 })
 
