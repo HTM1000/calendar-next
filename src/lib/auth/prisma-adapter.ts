@@ -9,10 +9,10 @@ export default function PrismaAdapter(
 ): Adapter {
   return {
     async createUser(user) {
-      const { '@igniteCall:userId': userIdOnCookies } = parseCookies({ req })
+      const { '@ignitecall:userId': userIdOnCookies } = parseCookies({ req })
 
       if (!userIdOnCookies) {
-        throw new Error('User ID not found on Cookies')
+        throw new Error('User ID not found on Cookies.')
       }
 
       const prismaUser = await prisma.user.update({
@@ -26,7 +26,7 @@ export default function PrismaAdapter(
         },
       })
 
-      destroyCookie({ res }, '@igniteCall:userId', {
+      destroyCookie({ res }, '@ignitecall:userId', {
         path: '/',
       })
 
@@ -60,7 +60,6 @@ export default function PrismaAdapter(
         avatar_url: user.avatar_url!,
       }
     },
-
     async getUserByEmail(email) {
       const user = await prisma.user.findUnique({
         where: {
@@ -81,7 +80,6 @@ export default function PrismaAdapter(
         avatar_url: user.avatar_url!,
       }
     },
-
     async getUserByAccount({ providerAccountId, provider }) {
       const account = await prisma.account.findUnique({
         where: {
@@ -114,7 +112,7 @@ export default function PrismaAdapter(
     async updateUser(user) {
       const prismaUser = await prisma.user.update({
         where: {
-          id: user.id,
+          id: user.id!,
         },
         data: {
           name: user.name,
@@ -162,8 +160,8 @@ export default function PrismaAdapter(
 
       return {
         userId,
-        expires,
         sessionToken,
+        expires,
       }
     },
 
