@@ -35,6 +35,7 @@ interface CalendarProps {
 }
 
 export default function Calendar({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   selectedDate,
   onDateSelected,
 }: CalendarProps) {
